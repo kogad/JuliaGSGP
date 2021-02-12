@@ -8,7 +8,7 @@ Documentation will be provided in the future.
 
 # Exapmle
 
-```
+```julia
 using JuliaGSGP
 using CSV, DataFrames
 using ScikitLearn: CrossValidation.train_test_split
