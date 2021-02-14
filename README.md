@@ -42,7 +42,7 @@ best_idx, rec = gsgp(cfg, X_train, y_train, X_test, y_test);
 tree = reconstruct_tree(best_idx, cfg,mutation_step)
 ```
 
-# Reference
+# References
 
 [1] Vanneschi L., Castelli M., Manzoni L., Silva S. (2013) A New Implementation of Geometric Semantic GP and Its Application to Problems in Pharmacokinetics. In: Krawiec K., Moraglio A., Hu T., Etaner-Uyar A.Ş., Hu B. (eds) Genetic Programming. EuroGP 2013. Lecture Notes in Computer Science, vol 7831. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-37207-0_18
 
