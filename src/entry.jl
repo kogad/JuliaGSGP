@@ -168,17 +168,22 @@ end
 
 # decrement unreferenced entry's parents' ref_counter recursively
 function _update_entry_pool!(pop)
-    s = Set{Int}()
+    s = Int[]
     for i in pop
         if ref_counter[i] == 0
             for j in entry_pool[i].index_entry
                 if j != -1
-                    decrement_ref!(j)
+                    # decrement_ref!(j)
                     push!(s, j)
                 end
             end
         end
     end
+
+    for i in s
+        decrement_ref!(i)
+    end
+    unique!(s)
 
     isempty(s) && return
     _update_entry_pool!(s)
