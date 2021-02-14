@@ -16,6 +16,9 @@ function gsgp(cfg, X_train, y_train, X_test, y_test; rec=Record(), seed=rand(UIn
     pop = getfield.(init_entries, :index)
     new_pop = similar(pop)
     old_pop = similar(pop)
+
+    avoid_overwrite.(pop)
+
     fitness = getfield.(init_entries, :train_fitness)
 
     register!(rec, "train_fitness", train_fitness, Float64)
@@ -32,7 +35,7 @@ function gsgp(cfg, X_train, y_train, X_test, y_test; rec=Record(), seed=rand(UIn
 
         elite_idx = argmin(fitness)
         new_pop[1] = pop[elite_idx]
-        avoid_overwrite(elite_idx)
+        avoid_overwrite(pop[elite_idx])
 
         for i in 2:cfg.population_size
             rand_num = rand()
@@ -51,7 +54,7 @@ function gsgp(cfg, X_train, y_train, X_test, y_test; rec=Record(), seed=rand(UIn
 
         update_fitness!(fitness, new_pop)
 
-        g > 2 && update_entry_pool!(old_pop)
+        g > 2 && update_entry_pool!(pop)
 
         add_record!(rec, g, pop, cfg)
 
@@ -60,6 +63,7 @@ function gsgp(cfg, X_train, y_train, X_test, y_test; rec=Record(), seed=rand(UIn
 
         verbose && print_latest_fitness(rec, g)
     end
+
 
     return pop[argmin(fitness)], rec
 end
