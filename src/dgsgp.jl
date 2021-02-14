@@ -26,7 +26,7 @@ function dgsgp(cfg, X_train, y_train, X_test, y_test; rec=Record(), seed=1, verb
     overwrite = false
 
     for g in 2:cfg.num_generations
-        overwrite = g == 2 
+        overwrite = g > 2 
         elite_idx = argmin(fitness)
         new_pop[1] = pop[elite_idx]
         avoid_overwrite(elite_idx)
